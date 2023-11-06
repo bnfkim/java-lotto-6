@@ -8,11 +8,11 @@ public class InputView {
     private final static String INPUT_LOTTO_NUM_MESSAGE = "당첨 번호를 입력해 주세요.";
     private final static String INPUT_BONUS_NUM_MESSAGE = "보너스 번호를 입력해 주세요.";
 
-    public String inputMoney() {
+    public int inputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         String input = readLine();
 
-        return input;
+        return Integer.parseInt(input);
     }
 
     public String inputLottoNum() {
@@ -20,6 +20,13 @@ public class InputView {
         String input = readLine();
 
         return input;
+    }
+
+    public int inputBonusNum() {
+        System.out.println(INPUT_BONUS_NUM_MESSAGE);
+        String input = readLine();
+
+        return Integer.parseInt(input);
     }
 
     private String readLine(){
