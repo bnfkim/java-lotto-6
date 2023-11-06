@@ -15,6 +15,13 @@ public class InputView {
         return input;
     }
 
+    public String inputLottoNum() {
+        System.out.println(INPUT_LOTTO_NUM_MESSAGE);
+        String input = readLine();
+
+        return input;
+    }
+
     private String readLine(){
         return Console.readLine();
     }
