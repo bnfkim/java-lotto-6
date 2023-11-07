@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Game;
+import lotto.domain.LottoAmount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -15,6 +15,14 @@ public class GameController {
     }
 
     public void run() {
+        LottoAmount lottoAmount = getLottoAmount();
+    }
 
+    private LottoAmount getLottoAmount() {
+        try {
+            return new LottoAmount(inputView.inputMoney());
+        } catch (IllegalArgumentException e) {
+            return getLottoAmount();
+        }
     }
 }
