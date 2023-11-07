@@ -24,6 +24,7 @@ public class GameController {
     public void run() {
         LottoAmount lottoAmount = getLottoAmount();
         int lottoCount = lottoAmount.getCountOfLotto();
+        outputView.printLottoCount(lottoCount);
 
         List<Lotto> lottoList = getLottoList(lottoCount);
     }
