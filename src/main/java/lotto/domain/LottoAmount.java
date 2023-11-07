@@ -5,20 +5,19 @@ public class LottoAmount {
     private final static int LOTTO_PRICE = 1000;
     private final int amount;
 
-    public LottoAmount(int money) {
-        validateAmount(money);
-        this.amount = getAmountOfLotto(money);
+    public LottoAmount(int amount) {
+        validateAmount(amount);
+        this.amount = amount;
     }
 
-    public int getAmountOfLotto(int money) {
-        return money % LOTTO_PRICE;
+    public int getCountOfLotto(int amount) {
+        return amount % LOTTO_PRICE;
     }
 
     public void validateAmount(int money) {
         validateDivisible(money);
         validateMinAmount(money);
         validateMaxAmount(money);
-
     }
 
     private void validateMinAmount(int amount) {
