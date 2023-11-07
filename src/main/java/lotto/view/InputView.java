@@ -11,26 +11,25 @@ public class InputView {
     public int inputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         String input = readLine();
-
+        InputValidator.isNotDist(input);
         return Integer.parseInt(input);
     }
 
     public String inputLottoNum() {
         System.out.println(INPUT_LOTTO_NUM_MESSAGE);
-        String input = readLine();
-
-        return input;
+        return readLine();
     }
 
     public int inputBonusNum() {
         System.out.println(INPUT_BONUS_NUM_MESSAGE);
         String input = readLine();
-
+        InputValidator.isNotDist(input);
         return Integer.parseInt(input);
     }
 
     private String readLine(){
-        return Console.readLine();
+        String input = Console.readLine();
+        InputValidator.isNotBlank(input);
+        return input;
     }
-
 }
