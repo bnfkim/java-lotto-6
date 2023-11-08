@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_PICK_COUNT = 6;
@@ -16,7 +19,9 @@ public class Lotto {
 
     private void validate(List<Integer> numbers) {
         validateSize(numbers);
-        validateNumber(numbers);
+        validateDuplicate(numbers);
+        validateRange(numbers);
+
     }
 
     private void validateSize(List<Integer> numbers) {
@@ -25,19 +30,29 @@ public class Lotto {
         }
     }
 
-    private void validateNumber(List<Integer> numbers) {
-        for(int number : numbers) {
-            validateNumberRange(number);
+    private void validateDuplicate(List<Integer> numbers) {
+        if(numbers.size() != new HashSet<>(numbers).size()) {
+            throw new IllegalArgumentException("[ERROR] 로또 번호가 중복되지 않게 입력해주세요.");
         }
+    }
+
+    private void validateRange(List<Integer> numbers) {
+        numbers.forEach(this::validateNumberRange);
     }
 
     private void validateNumberRange(int number) {
-        if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
-            throw new IllegalArgumentException();
+        if (isOutOfRange(number)) {
+            throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
         }
     }
 
-    public List<Integer> getLotto() {
-        return this.numbers;
+    private boolean isOutOfRange(int number){
+        return number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX;
+    }
+
+    public static List<Integer> convertInputToNumbers(String input) {
+        return Arrays.stream(input.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }
