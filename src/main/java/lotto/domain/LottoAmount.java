@@ -10,8 +10,8 @@ public class LottoAmount {
         this.amount = amount;
     }
 
-    public int getCountOfLotto(int amount) {
-        return amount % LOTTO_PRICE;
+    public int getCountOfLotto() {
+        return this.amount % LOTTO_PRICE;
     }
 
     public void validateAmount(int money) {
