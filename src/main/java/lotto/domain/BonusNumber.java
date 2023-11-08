@@ -1,12 +1,14 @@
 package lotto.domain;
 
-public class Number implements Comparable<Number> {
+import java.util.List;
+
+public class BonusNumber {
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
 
     private final int number;
 
-    public Number(int number) {
+    public BonusNumber(int number) {
         validateNumberRange(number);
         this.number = number;
     }
@@ -17,8 +19,7 @@ public class Number implements Comparable<Number> {
         }
     }
 
-    @Override
-    public int compareTo(Number o) {
-        return this.number - o.number;
+    public boolean isIn(List<Integer> numbers) {
+        return numbers.contains(number);
     }
 }
