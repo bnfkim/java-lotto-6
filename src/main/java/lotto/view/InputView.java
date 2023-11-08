@@ -15,12 +15,12 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public String inputLottoNum() {
+    public String inputLottoNumber() {
         System.out.println(INPUT_LOTTO_NUM_MESSAGE);
         return readLine();
     }
 
-    public int inputBonusNum() {
+    public int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUM_MESSAGE);
         String input = readLine();
         InputValidator.isNotDist(input);
