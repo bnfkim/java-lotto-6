@@ -2,12 +2,12 @@ package lotto.domain;
 
 public enum LottoRanking {
 
-    LOTTO_1ST(6,  false, 2_000_000_000),
-    LOTTO_2ND(5, true, 3_000_000),
-    LOTTO_3TH(5, false, 1_500_000),
-    LOTTO_4TH(4, false, 50_000),
-    LOTTO_5TH(3, false, 5_000),
-    LOTTO_NOTING(0, false, 0);
+    FIRST(6,  false, 2_000_000_000),
+    SECOND(5, true, 3_000_000),
+    THIRD(5, false, 1_500_000),
+    FOURTH(4, false, 50_000),
+    FIFTH(3, false, 5_000),
+    NOTING(0, false, 0);
 
     final int matchingCount;
     final boolean haveBonusNumber;
@@ -19,11 +19,29 @@ public enum LottoRanking {
         this.prizeMoney = prizeMoney;
     }
 
-    public int matchingCount() {
+    public boolean matchCount(int matchingCount) {
+        return this.matchingCount == matchingCount;
+    }
+
+    public int getMatchingCount(){
         return matchingCount;
     }
 
-    public int prizeMoney() {
+    public int getPrizeMoney() {
         return prizeMoney;
+    }
+
+    public LottoRanking of (int matchingCount, boolean haveBonusNumber) {
+        if(haveBonusNumber && SECOND.matchCount(matchingCount)) {
+            return SECOND;
+        }
+        for(LottoRanking ranking : values()) {
+            if(ranking == SECOND) continue;
+
+            if(ranking.matchCount(matchingCount)) {
+                return ranking;
+            }
+        }
+        return NOTING;
     }
 }
