@@ -6,7 +6,6 @@ import lotto.domain.LottoNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -27,6 +26,9 @@ public class GameController {
         outputView.printLottoCount(lottoCount);
 
         List<Lotto> lottoList = getLottoList(lottoCount);
+        outputView.printLottoList(lottoList);
+
+        Lotto lotto = new Lotto(getLottoNumbers());
     }
 
     private LottoAmount getLottoAmount() {
@@ -39,7 +41,16 @@ public class GameController {
 
     public List<Lotto> getLottoList(int count) {
         return IntStream.range(0, count)
-                .mapToObj(i -> new Lotto(new LottoNumbers().getLottoListASC()))
+                .mapToObj(i -> new Lotto(new LottoNumbers().getLottoNumbersSorted()))
                 .collect(Collectors.toList());
+    }
+
+    public List<Integer> getLottoNumbers() {
+        try {
+            String input = inputView.inputLottoNumber();
+            return new LottoNumbers(input).getLottoNumbersSorted();
+        } catch (IllegalArgumentException e) {
+            return getLottoNumbers();
+        }
     }
 }
