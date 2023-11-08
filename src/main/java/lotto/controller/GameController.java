@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.LottoAmount;
 import lotto.domain.LottoNumbers;
+import lotto.domain.Number;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -29,6 +30,7 @@ public class GameController {
         outputView.printLottoList(lottoList);
 
         Lotto lotto = new Lotto(getLottoNumbers());
+        Number bonusNumber = getBonusNumber();
     }
 
     private LottoAmount getLottoAmount() {
@@ -51,6 +53,14 @@ public class GameController {
             return new LottoNumbers(input).getLottoNumbersSorted();
         } catch (IllegalArgumentException e) {
             return getLottoNumbers();
+        }
+    }
+
+    public Number getBonusNumber() {
+        try {
+            return new Number(inputView.inputBonusNumber());
+        } catch (IllegalArgumentException e) {
+            return getBonusNumber();
         }
     }
 }
